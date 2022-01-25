@@ -8,7 +8,7 @@
     - role: in_memory_inventory
 
 - name: Testing 2
-  hosts: all
+  hosts: app_servers
   gather_facts: false
 
   tasks:

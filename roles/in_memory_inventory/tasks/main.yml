@@ -6,10 +6,7 @@
 
 - name: Build inventory
   add_host:
-    host: "{{ instance.name }}"
-    groups: 
-      - all
-      -  "{{ instance.metadata.AnsibleGroup }}"
+    host:         "{{ instance.name }}"
     ansible_host: "{{ instance.private_v4 }}"
   when: instance.metadata.AnsibleGroup == "osp_app_servers" or
         instance.metadata.AnsibleGroup == "osp_database_servers" or
