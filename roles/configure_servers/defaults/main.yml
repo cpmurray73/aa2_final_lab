@@ -1,0 +1,4 @@
+---
+# defaults file for configure_servers
+satellite_org:           prod
+satellite_activationkey: gpte-labs-rhel8
