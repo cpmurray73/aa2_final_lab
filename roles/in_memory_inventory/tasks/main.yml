@@ -1,0 +1,21 @@
+---
+- name: Collect instance information
+  os_server_info:
+    cloud: "{{ GUID }}-project"
+  register: instances
+
+- name: Build inventory
+  add_host:
+    host: "{{ instance.name }}"
+    groups: 
+      - all
+      -  "{{ instance.metadata.AnsibleGroup }}"
+    ansible_host: "{{ instance.private_v4 }}"
+  when: instance.metadata.AnsibleGroup == "osp_app_servers" or
+        instance.metadata.AnsibleGroup == "osp_database_servers" or
+        instance.metadata.AnsibleGroup == "osp_load_balancers"
+  loop: "{{ instances.openstack_servers }}"
+  loop_control:
+    loop_var: instance
+    label: "{{ instance.name }}"
+

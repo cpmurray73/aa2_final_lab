@@ -1,0 +1,10 @@
+---
+- name: Deploy infrastructure
+  hosts: all
+  connection: local
+  collections:
+    - openstack.cloud
+
+  roles:
+    - role: cloud_infra_deploy
+

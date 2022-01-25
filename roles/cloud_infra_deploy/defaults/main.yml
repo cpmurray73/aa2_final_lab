@@ -1,0 +1,4 @@
+---
+# defaults file for cloud_infra_deploy
+
+server_state: present

@@ -1,0 +1,37 @@
+---
+- name: Testing!
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  roles:
+    - role: in_memory_inventory
+
+- name: Testing 2
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - meta: refresh_inventory
+
+    - debug:
+        msg: Hello World!
+
+#    - name: Collect instance info
+#      os_server_info:
+#        cloud: "{{ GUID }}-project"
+#      register: instances
+
+#    - debug:
+#        var: instances.openstack_servers.1
+#        var: item
+#       loop:
+#        - "{{ instances.openstack_servers.1.name }}"
+#        - "{{ instances.openstack_servers.1.private_v4 }}"
+#        - "{{ instances.openstack_servers.1.key_name }}"
+#        msg: "{{ instance.private_v4 }}"
+#      loop: "{{ instances.openstack_servers }}"
+#      loop_control:
+#        loop_var: instance
+#        label: "{{ instance.name }}"
+
