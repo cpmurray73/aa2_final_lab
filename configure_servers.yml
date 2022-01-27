@@ -1,0 +1,8 @@
+- name: Perform server configuration
+  hosts: osp_app_servers
+  gather_facts: false
+
+  roles:
+
+  - role: configure_servers
+
