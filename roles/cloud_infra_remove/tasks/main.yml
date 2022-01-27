@@ -1,9 +1,9 @@
 ---
 - name: Manage instances
   openstack.cloud.server:
-    name:            "{{ inventory_hostname }}"
-    state:           "{{ server_state }}"
-    wait:            yes
+    name:  "{{ inventory_hostname }}"
+    state: "{{ server_state }}"
+    wait:  yes
 #  loop: "{{ instances }}"
 #  loop_control:
 #    label:    "{{ instance.name }}"
