@@ -7,7 +7,7 @@
     line:  "{{ item }}"
   loop:
     - PEERDNS=no
-    - DNS1={{ hostvars.localhost.ansible_default_ipv4.address }}
+    - "DNS1={{ dns_server }}"
   notify: Restart Networking
 
 - name: Install katello-ca-consumer package
