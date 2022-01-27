@@ -21,11 +21,26 @@
   loop_control:
     label:    "{{ instance.name }}"
     loop_var: instance
-  register: create_instances
+  register: created_instances
+
+- name: Get Openstack server info
+  os_server_info:
+    cloud:  "{{ GUID }}-project"
+    server: "{{ instance.name }}"
+  loop:     "{{ instances }}"
+  loop_control:
+    label:    "{{ instance.name }}"
+    loop_var: instance
+  register: created_instances
 
 - name: Wait for host to respond
   wait_for: 
-    host:  "{{ create_instances.results.0.openstack.private_v4 }}"
+    host:  "{{ created_instance.1.private_v4 }}"
     port:  22
     state: started
+  loop: "{{ created_instances.results|subelements('openstack_servers') }}"
+  loop_control:
+    loop_var: created_instance
+    label:    "{{ created_instance.1.name }}"
+
     

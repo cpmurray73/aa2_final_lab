@@ -1,2 +1,40 @@
 ---
 # vars file for cloud_infra_deploy
+
+instances:
+  - name: "app1"
+    keypair:        "{{ GUID }}-keypair"
+    image:          "rhel-8.3"
+    flavor:         "GLOBAL-CPU_4_Memory_8192_Disk_30_flavor"
+    security_group: "{{ GUID }}-HostSG"
+    network:        "{{ GUID }}-dev-network"
+    metadata:
+      AnsibleGroup: "osp_app_servers"
+
+  - name: "app2"
+    keypair:        "{{ GUID }}-keypair"
+    image:          "rhel-8.3"
+    flavor:         "GLOBAL-CPU_4_Memory_8192_Disk_30_flavor"
+    security_group: "{{ GUID }}-HostSG"
+    network:        "{{ GUID }}-dev-network"
+    metadata:
+      AnsibleGroup: "osp_app_servers"
+
+  - name: "appdb1"
+    keypair:        "{{ GUID }}-keypair"
+    image:          "rhel-8.3"
+    flavor:         "GLOBAL-CPU_4_Memory_8192_Disk_30_flavor"
+    security_group: "{{ GUID }}-HostSG"
+    network:        "{{ GUID }}-dev-network"
+    metadata:
+      AnsibleGroup: "osp_database_servers"
+
+  - name: "frontend1"
+    keypair:        "{{ GUID }}-keypair"
+    image:          "rhel-8.3"
+    flavor:         "GLOBAL-CPU_4_Memory_8192_Disk_30_flavor"
+    security_group: "{{ GUID }}-HostSG"
+    network:        "{{ GUID }}-dev-network"
+    metadata:
+      AnsibleGroup: "osp_load_balancers"
+

@@ -1,7 +1,8 @@
 ---
-- name: Deploy infrastructure
+- name: Build hosts
   hosts: all
   connection: local
+  debugger: on_failed
   collections:
     - openstack.cloud
 
