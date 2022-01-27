@@ -25,7 +25,7 @@
 
 - name: Get Openstack server info
   os_server_info:
-    cloud:  "{{ GUID }}-project"
+#    cloud:  "{{ GUID }}-project"
     server: "{{ instance.name }}"
   loop:     "{{ instances }}"
   loop_control:
