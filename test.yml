@@ -1,21 +1,32 @@
 ---
 - name: Testing!
-  hosts: localhost
+  hosts: all
   connection: local
   gather_facts: false
 
-  roles:
-    - role: in_memory_inventory
 
-- name: Testing 2
-  hosts: all
-  gather_facts: false
-
+#- name: Testing 2
+#  hosts: all
+#  connection: local
+#  gather_facts: false
+#
   tasks:
-    - meta: refresh_inventory
+
+#    - meta: refresh_inventory
+
+    - command: hostname
+      register: output
 
     - debug:
-        msg: Hello World!
+        var: output.stdout_lines
+
+#    - debug:
+#        var: instance.openstack_servers.private_v4
+#        var: instance.private_v4
+#      loop: "{{ instances.openstack_servers }}"
+#      loop_control:
+#        loop_var: instance
+#        label:    "{{ instance.name }}"
 
 #    - name: Collect instance info
 #      os_server_info:
