@@ -1,6 +1,6 @@
 ---
 - name: Testing!
-  hosts: all
+  hosts: app_servers,database_servers,load_balancers
 #  connection: local
   gather_facts: false
 

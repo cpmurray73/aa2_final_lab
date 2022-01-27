@@ -1,23 +1,31 @@
 ---
 - name: Manage instances
   openstack.cloud.server:
-    cloud: "{{ GUID }}-project"
-    name: "{{ instance.name }}"
-    state: "{{ server_state }}"
-    image: "{{ instance.image }}"
-    flavor: "{{ instance.flavor }}"
-    key_name: "{{ instance.keypair }}"
-    wait: yes
+    cloud:           "{{ GUID }}-project"
+    name:            "{{ instance.name }}"
+    state:           "{{ server_state }}"
+    image:           "{{ instance.image }}"
+    flavor:          "{{ instance.flavor }}"
+    key_name:        "{{ instance.keypair }}"
+    wait:            yes
     security_groups: "{{ instance.security_group }}"
-    delete_fip: yes
+    delete_fip:      yes
     nics:
-      - net-name: "{{ instance.network }}"
+      - net-name:    "{{ instance.network }}"
     meta: "AnsibleGroup={{instance.metadata.AnsibleGroup}},deployment_name=dev"
     user_data:
       manage_resolv_conf: true
       resolv_conf:
-        nameservers: "{{ ansible_default_ipv4.address | to_json }}"
+        nameservers: "192.168.50.79"
   loop: "{{ instances }}"
   loop_control:
+    label:    "{{ instance.name }}"
     loop_var: instance
+  register: create_instances
 
+- name: Wait for host to respond
+  wait_for: 
+    host:  "{{ create_instances.results.0.openstack.private_v4 }}"
+    port:  22
+    state: started
+    
