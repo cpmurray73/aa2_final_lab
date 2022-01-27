@@ -1,6 +1,6 @@
 ---
 - name: Testing!
-  hosts: server1
+  hosts: all
 #  connection: local
   gather_facts: false
 
