@@ -1,5 +1,5 @@
 - name: Perform server configuration
-  hosts: osp_app_servers
+  hosts: app_servers,database_servers,load_balancers
   gather_facts: false
 
   roles:
