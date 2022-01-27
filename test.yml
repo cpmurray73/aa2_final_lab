@@ -14,11 +14,8 @@
 
 #    - meta: refresh_inventory
 
-    - command: hostname
-      register: output
-
     - debug:
-        var: output.stdout_lines
+        var: group_names
 
 #    - debug:
 #        var: instance.openstack_servers.private_v4
