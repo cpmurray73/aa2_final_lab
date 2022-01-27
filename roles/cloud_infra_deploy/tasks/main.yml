@@ -13,10 +13,6 @@
     nics:
       - net-name:    "{{ instance.network }}"
     meta: "AnsibleGroup={{instance.metadata.AnsibleGroup}},deployment_name=dev"
-    user_data:
-      manage_resolv_conf: true
-      resolv_conf:
-        nameservers: "192.168.50.79"
   loop: "{{ instances }}"
   loop_control:
     label:    "{{ instance.name }}"
