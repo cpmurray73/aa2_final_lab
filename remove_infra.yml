@@ -1,0 +1,10 @@
+---
+- name: Remove infrastructure
+  hosts: app_servers,database_servers,load_balancers
+  connection: local
+  collections:
+    - openstack.cloud
+
+  roles:
+    - role: cloud_infra_remove
+
