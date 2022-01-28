@@ -6,6 +6,7 @@
     cmd: ip addr show eth0 | awk '/inet / { print \$2 }' | sed 's/\/.*//'
   delegate_to: localhost
   register: control_ip
+  become: false
 
 - name: Ensure DNS configuration
   command: >-
