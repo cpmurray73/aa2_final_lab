@@ -1,14 +1,17 @@
 ---
 # tasks file for configure_servers
 - name: Ensure DNS configuration
-  lineinfile:
-    state: present
-    path:  /etc/sysconfig/network-scripts/ifcfg-eth0
-    line:  "{{ item }}"
-  loop:
-    - PEERDNS=no
-    - "DNS1={{ dns_server }}"
-  notify: Restart Networking
+  command: >-
+    nmcli connection modify "System eth0"
+    ipv4.ignore-auto-dns yes
+    ipv4.dns {{ ansible_default_ipv4.address }}
+    +ipv4.dns {{ ansible_dns.nameservers.0 }}
+    +ipv4.dns 8.8.8.8
+
+- name: Restart netowrking
+  service:
+    name: NetworkManager
+    state: restarted
 
 - name: Install katello-ca-consumer package
   yum:
