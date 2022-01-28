@@ -1,45 +1,15 @@
 ---
 - name: Testing!
   hosts: app_servers,database_servers,load_balancers
-#  connection: local
   gather_facts: false
 
 
-#- name: Testing 2
-#  hosts: all
-#  connection: local
-#  gather_facts: false
-#
   tasks:
 
-#    - meta: refresh_inventory
+
+    - command: hostname
+      register: output
 
     - debug:
-        var: group_names
-
-#    - debug:
-#        var: instance.openstack_servers.private_v4
-#        var: instance.private_v4
-#      loop: "{{ instances.openstack_servers }}"
-#      loop_control:
-#        loop_var: instance
-#        label:    "{{ instance.name }}"
-
-#    - name: Collect instance info
-#      os_server_info:
-#        cloud: "{{ GUID }}-project"
-#      register: instances
-
-#    - debug:
-#        var: instances.openstack_servers.1
-#        var: item
-#       loop:
-#        - "{{ instances.openstack_servers.1.name }}"
-#        - "{{ instances.openstack_servers.1.private_v4 }}"
-#        - "{{ instances.openstack_servers.1.key_name }}"
-#        msg: "{{ instance.private_v4 }}"
-#      loop: "{{ instances.openstack_servers }}"
-#      loop_control:
-#        loop_var: instance
-#        label: "{{ instance.name }}"
+        var: output.stdout_lines
 
