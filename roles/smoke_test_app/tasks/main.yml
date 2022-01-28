@@ -1,0 +1,13 @@
+---
+# tasks file for roles/smoke_test_app
+
+- name: Check webserver for correct response
+  uri:
+    url: "http://frontend1/ping"
+    return_content: yes
+  until: '"alive" in result.content'
+  retries: 10
+  delay: 1
+  register: result
+  delegate_to: localhost
+

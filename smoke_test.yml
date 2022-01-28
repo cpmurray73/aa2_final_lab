@@ -1,0 +1,17 @@
+- name: End to end smoke tests
+  hosts: app_servers:database_servers
+  gather_facts: true
+  become: true
+
+  roles:
+  - roles: smoke_test_db
+
+- name: End to end smoke tests
+  hosts: app_servers
+  become: false
+  gather_facts: false
+
+  roles:
+
+  - role: smoke_test_app
+
