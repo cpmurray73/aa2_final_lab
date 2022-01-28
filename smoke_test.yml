@@ -4,7 +4,7 @@
   become: true
 
   roles:
-  - roles: smoke_test_db
+  - role: smoke_test_db
 
 - name: End to end smoke tests
   hosts: app_servers
