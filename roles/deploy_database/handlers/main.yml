@@ -1,0 +1,7 @@
+---
+# handlers file for deploy_database
+- name: restart_postgres
+  service:
+    name: "{{ postgres_service }}"
+    state: restarted
+
