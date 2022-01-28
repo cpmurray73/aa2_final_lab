@@ -1,5 +1,9 @@
 ---
 # tasks file for deploy_database---
+
+- name: Disable Postgresql streams
+  command: yum -qy disable postgresql
+
 - name: Install Postgres packages
   package:
     name:              "{{ __package }}"
