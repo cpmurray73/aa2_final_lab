@@ -1,2 +1,6 @@
 ---
 # handlers file for configure_servers
+- name: Restart Networking
+  service:
+    name: NetworkManager
+    state: restarted
