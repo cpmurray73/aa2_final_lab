@@ -1,6 +1,6 @@
 - name: Perform server configuration
   hosts:        app_servers,database_servers,load_balancers
-  gather_facts: false
+  gather_facts: true
   become:       true
 
   roles:
