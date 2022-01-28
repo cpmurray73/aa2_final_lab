@@ -1,9 +1,10 @@
 ---
 # tasks file for configure_servers
+#
 - name: Get control IP address
-  local_action:
-    module: shell
+  shell:
     cmd: ip addr show eth0 | awk '/inet / { print \$2 }' | sed 's/\/.*//'
+  delegate_to: localhost
   register: control_ip
 
 - name: Ensure DNS configuration
