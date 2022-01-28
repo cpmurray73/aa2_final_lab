@@ -56,15 +56,15 @@
     dest: /usr/local/bin/launch_resource_hub
     mode: '0555'
 
-    - name: template systemd service config
-      template:
-        src: flask_service.j2
-        dest: /etc/systemd/system/{{ flask_app_name }}.service
-        mode: '0755'
+- name: template systemd service config
+  template:
+    src: flask_service.j2
+    dest: /etc/systemd/system/{{ flask_app_name }}.service
+    mode: '0755'
 
-    - name: start systemd app service
-      systemd:
-        name: "{{ flask_app_name }}.service"
-        state: restarted
-        enabled: yes
+- name: start systemd app service
+  systemd:
+    name: "{{ flask_app_name }}.service"
+    state: restarted
+    enabled: yes
 
