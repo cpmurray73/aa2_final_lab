@@ -3,7 +3,7 @@
 #
 - name: Get control IP address
   shell:
-    cmd: ip addr show eth0 | awk '/inet / { print \$2 }' | sed 's/\/.*//'
+    cmd: ip addr show eth0 | awk '/inet / { print $2 }' | sed 's/\/.*//'
   delegate_to: localhost
   register: control_ip
   become: false
