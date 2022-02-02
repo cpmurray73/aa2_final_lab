@@ -3,6 +3,8 @@
 
 - name: Disable Postgresql streams
   command: yum -qy module disable postgresql
+  args:
+    warn: false
 
 - name: Install Postgres packages
   package:
