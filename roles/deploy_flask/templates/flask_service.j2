@@ -1,4 +1,4 @@
-{{ ansible_managed }}
+{{ ansible_managed | comment }}
 [Unit]
 Description=Launch flask app {{ flask_app_name }}
 After=network.target
