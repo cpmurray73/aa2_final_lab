@@ -20,7 +20,12 @@
     meta: "AnsibleGroup={{instance.metadata.AnsibleGroup}},deployment_name=dev"
     user_data: |
       #!/usr/bin/bash
-      nmcli connection modify "System eth0" ipv4.ignore-auto-dns yes ipv4.dns {{ ansible_dns.nameservers.0 }} +ipv4.dns {{ ansible_dns.nameservers.1 }} +ipv4.dns 8.8.8.8
+      nmcli connection modify "System eth0" \
+          ipv4.ignore-auto-dns yes \
+          ipv4.dns {{ ansible_dns.nameservers.0 }} \
+          +ipv4.dns {{ ansible_dns.nameservers.1 }} \
+          +ipv4.dns 8.8.8.8
+      systemctl restart NetworkManager
   loop: "{{ instances }}"
   loop_control:
     label:    "{{ instance.name }}"
