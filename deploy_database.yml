@@ -1,5 +1,5 @@
 ---
-- name:         Configure Database
+- name: Configure Database
   hosts:        database_servers
   gather_facts: false
   become:       true
