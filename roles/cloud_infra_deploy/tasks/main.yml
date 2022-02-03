@@ -22,8 +22,8 @@
       #!/bin/bash
       nmcli connection modify "System eth0" \
           ipv4.ignore-auto-dns yes \
-          ipv4.dns {{ dns_server }} \
-          +ipv4.dns {{ ansible_dns.nameservers.0 }} \
+          ipv4.dns {{ ansible_dns.nameservers.0 }} \
+          +ipv4.dns {{ ansible_dns.nameservers.1 }} \
           +ipv4.dns 8.8.8.8
   loop: "{{ instances }}"
   loop_control:
