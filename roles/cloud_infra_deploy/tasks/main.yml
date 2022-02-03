@@ -1,18 +1,30 @@
 ---
+
+- name: Gather network facts
+  setup:
+    gather_subset:
+      - network
+
 - name: Manage instances
   openstack.cloud.server:
-#    cloud:           "{{ GUID }}-project"
     name:            "{{ instance.name }}"
     state:           "{{ server_state }}"
     image:           "{{ instance.image }}"
     flavor:          "{{ instance.flavor }}"
     key_name:        "{{ instance.keypair }}"
-    wait:            yes
+    wait:            no
     security_groups: "{{ instance.security_group }}"
     delete_fip:      yes
     nics:
       - net-name:    "{{ instance.network }}"
     meta: "AnsibleGroup={{instance.metadata.AnsibleGroup}},deployment_name=dev"
+    user_data: |
+      #!/bin/bash
+      nmcli connection modify "System eth0" \
+          ipv4.ignore-auto-dns yes \
+          ipv4.dns {{ dns_server }} \
+          +ipv4.dns {{ ansible_dns.nameservers.0 }} \
+          +ipv4.dns 8.8.8.8
   loop: "{{ instances }}"
   loop_control:
     label:    "{{ instance.name }}"
@@ -38,5 +50,3 @@
   loop_control:
     loop_var: created_instance
     label:    "{{ created_instance.1.name }}"
-
-    

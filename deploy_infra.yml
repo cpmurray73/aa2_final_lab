@@ -1,8 +1,7 @@
 ---
 - name: Build hosts
-  hosts: all
-  connection: local
-  debugger: on_failed
+  hosts:        all
+  gather_facts: false
   collections:
     - openstack.cloud
 
