@@ -2,19 +2,6 @@
 # tasks file for configure_servers
 #
 
-- name: Ensure DNS configuration
-  command: >-
-    nmcli connection modify "System eth0"
-    ipv4.ignore-auto-dns yes
-    ipv4.dns {{ dns_server }}
-    +ipv4.dns {{ ansible_dns.nameservers.0 }}
-    +ipv4.dns 8.8.8.8
-
-- name: Restart networking
-  service:
-    name: NetworkManager
-    state: restarted
-
 - name: Install katello-ca-consumer package
   yum:
     name:              http://satellite.example.com/pub/katello-ca-consumer-latest.noarch.rpm
