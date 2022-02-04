@@ -1,4 +1,4 @@
-cloud_server_deploy
+cloud_infra_deploy
 =========
 
 Manage deployment of cloud servers

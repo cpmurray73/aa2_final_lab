@@ -1,7 +1,7 @@
-Role Name
+deploy_database
 =========
 
-A brief description of the role goes here.
+Deploys database
 
 Requirements
 ------------
