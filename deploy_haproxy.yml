@@ -6,3 +6,11 @@
   roles:
 
   - role: deploy_haproxy
+
+  - role: configure_firewall
+    vars:
+      firewall_services:
+        - http
+      firewall_tcp_ports:
+        - 5000
+

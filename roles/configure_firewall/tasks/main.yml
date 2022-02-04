@@ -1,0 +1,45 @@
+---
+# tasks file for roles/configure_firewall
+
+- name: Install firewalld
+  yum:
+    name: firewalld
+    state: latest
+
+- name: Open service ports
+  when: firewall_services is defined
+  firewalld:
+    service: "{{ firewall_service }}"
+    state: enabled
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop: "{{ firewall_services }}"
+  loop_control:
+    loop_var: firewall_service
+    label: "Port {{ firewall_service }}/udp"
+
+- name: Open tcp ports
+  when: firewall_tcp_ports is defined
+  firewalld:
+    port: "{{ tcp_port }}/tcp"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop: "{{ firewall_tcp_ports }}"
+  loop_control:
+    loop_var: tcp_port
+    label: "Port {{ tcp_port }}/udp"
+
+- name: Open udp ports
+  when: firewall_udp_ports is defined
+  firewalld:
+    port: "{{ udp_port }}/udp"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop: "{{ firewall_udp_ports }}"
+  loop_control:
+    loop_var: udp_port
+    label: "Port {{ udp_port }}/udp"
+

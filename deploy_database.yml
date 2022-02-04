@@ -8,3 +8,8 @@
 
   - role: deploy_database
 
+  - role: configure_firewall
+    vars:
+      firewall_services:
+        - postgresql
+

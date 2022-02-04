@@ -9,3 +9,9 @@
   roles:
   - role: deploy_flask
 
+  - role: configure_firewall
+    vars:
+      firewall_services:
+        - http
+      firewall_tcp_ports:
+        - 8080
