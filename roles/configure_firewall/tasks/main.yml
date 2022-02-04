@@ -6,6 +6,12 @@
     name: firewalld
     state: latest
 
+- name: Ensure firewalld is running
+  service:
+    name: firewalld
+    state: started
+    enabled: true
+
 - name: Open service ports
   when: firewall_services is defined
   firewalld:
